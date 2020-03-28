@@ -1,31 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="zh-tw">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Chatroom</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
-    </script>
-    <link rel="stylesheet" href="style.css" />
-    <script src="app.js"></script>
- </head>
-  <body>
-    <div id="container">
-      <div id="status-box">Server: <span id="status">-</span> / <span id="online">0</span> online.</div>
-      <div id="content">
-      </div>
-      <div id="send-box">
-        <form id="send-form">
-          <input type="text" name="name" id="name" placeholder="暱稱">
-          <!--input type="text" name="msg" id="msg" placeholder="說點什麼？"-->
-          <input type="submit" value="骰子">
-        </form>
-      </div>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Chatroom</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="status-box">Server: <span id="status">-</span> / <span id="online">0</span> online.</div>
+    <div id="content">
     </div>
+    <div id="send-box">
+      <form id="send-form">
+        <input type="text" name="name" id="name" placeholder="暱稱">
+        <!--input type="text" name="msg" id="msg" placeholder="說點什麼？"-->
+        <input type="submit" value="骰子">
+      </form>
+    </div>
+  </div>
+  <div class="uperDICE">
+    <div class="dice">
+      <ol class="die-list even-roll" data-roll="1" id="die-1">
+        <li class="die-item" data-side="1">
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="2">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="3">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="4">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="5">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="6">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+      </ol>
+      <ol class="die-list odd-roll" data-roll="1" id="die-2">
+        <li class="die-item" data-side="1">
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="2">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="3">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="4">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="5">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="6">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+      </ol>
+    </div>
+    <button type="button" id="roll-button">Roll Dice</button>
+  </div>
 
- </body>
+</body>
+
 </html>
-
