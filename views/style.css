@@ -20,6 +20,7 @@
         margin: 0 auto;
         display: block;
         position: relative;
+        padding: 32;
       }
 
       #status-box {
