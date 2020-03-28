@@ -122,8 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-});
-
 
 function rollDice() {
   const dice = [...document.querySelectorAll(".die-list")];
@@ -145,3 +143,9 @@ function getRandomNumber(min, max) {
 }
 
 document.getElementById("roll-button").addEventListener("click", rollDice);
+
+});
+
+
+
+
