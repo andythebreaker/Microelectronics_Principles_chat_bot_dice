@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chatroom</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js"></script>
+ </head>
+  <body>
+    <div id="container">
+      <div id="status-box">Server: <span id="status">-</span> / <span id="online">0</span> online.</div>
+      <div id="content">
+      </div>
+      <div id="send-box">
+        <form id="send-form">
+          <input type="text" name="name" id="name" placeholder="暱稱">
+          <!--input type="text" name="msg" id="msg" placeholder="說點什麼？"-->
+          <input type="submit" value="骰子">
+        </form>
+      </div>
+    </div>
+
+ </body>
+</html>
+
