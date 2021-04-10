@@ -38,9 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   socket.on("msg", addMsgToBox);
 
-  function send_msg_main(e) {
-    e.preventDefault();
-
+  function send_msg_main(randomORmsg) {
 
     var ok = true;
     var formData = {
@@ -67,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (ok) {
       //var child = formChild[1];
       //child.name = "msg";
-      formData["msg"] = (getRandom(1, 6));
+      if (randomORmsg) formData["msg"] = document.getElementById("dice_data_place").innerText;
       console.log(getRandom(1, 6));
       socket.emit("send", formData);
       setCookie("name", nameInputBox.value);
@@ -76,38 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sendForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-
-    var ok = true;
-    var formData = {
-      time: new Date().toUTCString()
-    };
-    var formChild = sendForm.children;
-
-    for (var i = 0; i < sendForm.childElementCount; i++) {
-      var child = formChild[i];
-      if (child.name !== "") {
-        var val = child.value;
-        if (val === "" || !val) {
-          ok = false;
-          child.classList.add("error");
-        } else {
-          child.classList.remove("error");
-          formData[child.name] = val;
-          console.log(child.name);
-          console.log(val);
-        }
-      }
-    }
-
-    if (ok) {
-      //var child = formChild[1];
-      //child.name = "msg";
-      formData["msg"] = (getRandom(1, 6));
-      console.log(getRandom(1, 6));
-      socket.emit("send", formData);
-      setCookie("name", nameInputBox.value);
-    }
+    send_msg_main(false);
   });
 
   function addMsgToBox(d) {
@@ -161,10 +128,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function rollDice() {
     const dice = [...document.querySelectorAll(".die-list")];
+    var dice_num_1 = getRandom(1, 6);
+    var dice_num_2 = getRandom(1, 6);
+    var count_di = 1;
     dice.forEach(die => {
       toggleClasses(die);
-      die.dataset.roll = getRandomNumber(1, 6);
+      if (count_di % 2 == 0) {
+        die.dataset.roll = dice_num_1;
+
+      } else {
+        die.dataset.roll = dice_num_2;
+      }
+      count_di++;
     });
+    console.log(dice_num_1 + dice_num_2);
+    document.getElementById("dice_data_place").innerText = String(dice_num_1 + dice_num_2);
+    send_msg_main(true);
   }
 
   function toggleClasses(die) {
