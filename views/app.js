@@ -63,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (ok) {
-      //var child = formChild[1];
-      //child.name = "msg";
-      if (randomORmsg) formData["msg"] = document.getElementById("dice_data_place").innerText;
-      console.log(getRandom(1, 6));
+      if (randomORmsg) {
+        formData["msg"] = document.getElementById("dice_data_place").innerText;
+      } else {
+        var child = formChild[1];
+        child.name = "msg";
+      }
       socket.emit("send", formData);
       setCookie("name", nameInputBox.value);
     }
