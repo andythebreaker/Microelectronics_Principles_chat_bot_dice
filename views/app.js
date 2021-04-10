@@ -38,6 +38,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   socket.on("msg", addMsgToBox);
 
+  function send_msg_main(e) {
+    e.preventDefault();
+
+
+    var ok = true;
+    var formData = {
+      time: new Date().toUTCString()
+    };
+    var formChild = sendForm.children;
+
+    for (var i = 0; i < sendForm.childElementCount; i++) {
+      var child = formChild[i];
+      if (child.name !== "") {
+        var val = child.value;
+        if (val === "" || !val) {
+          ok = false;
+          child.classList.add("error");
+        } else {
+          child.classList.remove("error");
+          formData[child.name] = val;
+          console.log(child.name);
+          console.log(val);
+        }
+      }
+    }
+
+    if (ok) {
+      //var child = formChild[1];
+      //child.name = "msg";
+      formData["msg"] = (getRandom(1, 6));
+      console.log(getRandom(1, 6));
+      socket.emit("send", formData);
+      setCookie("name", nameInputBox.value);
+    }
+  }
+
   sendForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -123,26 +159,26 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-function rollDice() {
-  const dice = [...document.querySelectorAll(".die-list")];
-  dice.forEach(die => {
-    toggleClasses(die);
-    die.dataset.roll = getRandomNumber(1, 6);
-  });
-}
+  function rollDice() {
+    const dice = [...document.querySelectorAll(".die-list")];
+    dice.forEach(die => {
+      toggleClasses(die);
+      die.dataset.roll = getRandomNumber(1, 6);
+    });
+  }
 
-function toggleClasses(die) {
-  die.classList.toggle("odd-roll");
-  die.classList.toggle("even-roll");
-}
+  function toggleClasses(die) {
+    die.classList.toggle("odd-roll");
+    die.classList.toggle("even-roll");
+  }
 
-function getRandomNumber(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+  function getRandomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-document.getElementById("roll-button").addEventListener("click", rollDice);
+  document.getElementById("roll-button").addEventListener("click", rollDice);
 
 });
 
